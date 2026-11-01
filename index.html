@@ -107,9 +107,15 @@ h2::after{content:"";flex:1;height:1px;background:var(--rule)}
 .card .lbl{font:600 11.5px var(--f-mono);color:var(--box);letter-spacing:.03em}
 .card h3{font:700 20px/1.2 var(--f-display);margin:0;text-wrap:balance}
 .card p{margin:0;color:var(--muted);font-size:15px}
-.card .res{margin-top:auto;padding-top:8px;font:600 13.5px var(--f-mono);color:var(--ink)}
+.card .res{margin-top:auto;padding-top:10px;font:600 13.5px var(--f-mono);color:var(--ink)}
 .card:hover{border-color:var(--box)}
 
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:-6px}
+.chip{font:500 12.5px var(--f-mono);padding:6px 12px;border-radius:999px;border:1px solid var(--rule);background:transparent;color:var(--muted);cursor:pointer}
+.chip:hover{color:var(--ink);border-color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.card .org-y{font:12px var(--f-mono);color:var(--muted)}
+.card .res{display:block}
 /* experience timeline */
 .tl{display:flex;flex-direction:column}
 .job{display:grid;grid-template-columns:150px minmax(0,1fr);gap:4px 24px;padding:18px 0;border-top:1px solid var(--rule)}
@@ -217,31 +223,99 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
   </div>
 
   <section id="work" aria-labelledby="work-h">
-    <h2 id="work-h">Selected work</h2>
+    <h2 id="work-h">Selected work · 14 projects</h2>
+    <div class="filters" role="toolbar" aria-label="Filter projects">
+      <button type="button" class="chip" aria-pressed="true" data-f="all">All</button>
+      <button type="button" class="chip" aria-pressed="false" data-f="cv">Computer vision</button>
+      <button type="button" class="chip" aria-pressed="false" data-f="nlp">NLP &amp; LLMs</button>
+      <button type="button" class="chip" aria-pressed="false" data-f="pred">Predictive models</button>
+      <button type="button" class="chip" aria-pressed="false" data-f="data">Data &amp; pipelines</button>
+      <button type="button" class="chip" aria-pressed="false" data-f="res">Research</button>
+    </div>
     <div class="work">
-      <article class="card">
-        <span class="lbl">computer_vision · ocr</span>
-        <h3>Automated meter reading</h3>
-        <p>Object detection and OCR that read electrical meters automatically at Systems Limited, replacing manual reading.</p>
-        <span class="res">−80% manual effort</span>
-      </article>
-      <article class="card">
+      <article class="card" data-t="cv">
         <span class="lbl">detection · tracking · re-id</span>
         <h3>Cashier-less store on one camera</h3>
-        <p>The vision models behind a fully working grab-and-go store at Livello: product detection, multi-object tracking and person re-identification.</p>
-        <span class="res">Live store, single camera</span>
+        <p>The vision models behind a fully working grab-and-go store: product detection, multi-object tracking and person re-identification, plus research into multi-camera setups.</p>
+        <span class="res">Live store, single camera</span><span class="org-y">Livello · 2022–23</span>
       </article>
-      <article class="card">
-        <span class="lbl">nlp · llm · retrieval</span>
-        <h3>Biomedical search and RAG</h3>
-        <p>A biomedical search system on BioBERT models I trained and deployed, and retrieval-augmented generation pipelines with LLMs and a Pinecone vector database.</p>
-        <span class="res">Deployed on company servers</span>
+      <article class="card" data-t="cv">
+        <span class="lbl">computer_vision · ocr</span>
+        <h3>Automated meter reading</h3>
+        <p>Object detection and OCR that read electrical meters automatically, replacing manual reading.</p>
+        <span class="res">−80% manual effort</span><span class="org-y">Systems Limited · 2020</span>
       </article>
-      <article class="card">
+      <article class="card" data-t="nlp">
+        <span class="lbl">llm · rag · vector_search</span>
+        <h3>Retrieval-augmented generation</h3>
+        <p>RAG pipelines that embed documents into a Pinecone vector database and retrieve the right passages, so large language models answer from an organisation's own content.</p>
+        <span class="res">Grounded LLM answers</span><span class="org-y">Systems Limited</span>
+      </article>
+      <article class="card" data-t="nlp">
+        <span class="lbl">nlp · biobert</span>
+        <h3>Biomedical search engine</h3>
+        <p>A search system for biomedical data built on BioBERT models I trained and deployed, so users can search by meaning instead of exact keywords.</p>
+        <span class="res">Deployed on company servers</span><span class="org-y">Systems Limited · 2020</span>
+      </article>
+      <article class="card" data-t="pred">
         <span class="lbl">tabular · production</span>
-        <h3>Customer value and risk models</h3>
-        <p>Customer lifetime value and insurance risk models, tuned and benchmarked against baselines, then deployed to production behind APIs.</p>
-        <span class="res">In production use</span>
+        <h3>Customer value and insurance risk</h3>
+        <p>Customer lifetime value and insurance risk models, tuned and benchmarked against baselines before going live.</p>
+        <span class="res">Deployed to production</span><span class="org-y">Systems Limited · 2020</span>
+      </article>
+      <article class="card" data-t="pred data">
+        <span class="lbl">forecasting · dashboards</span>
+        <h3>Sales and demand forecasting</h3>
+        <p>Forecasting models for sales prediction and demand planning, delivered through interactive dashboards in Power BI and Plotly Dash.</p>
+        <span class="res">Dashboards for demand planning</span><span class="org-y">Systems Limited · 2020</span>
+      </article>
+      <article class="card" data-t="cv res">
+        <span class="lbl">gans · synthetic_data</span>
+        <h3>Synthetic data for scarce images</h3>
+        <p>Image classifiers for industrial welding data, with GANs generating extra training images where real samples were scarce.</p>
+        <span class="res">GAN-generated training data</span><span class="org-y">RWTH Aachen · 2022–23</span>
+      </article>
+      <article class="card" data-t="pred res">
+        <span class="lbl">regression · materials</span>
+        <h3>Predicting weld strength</h3>
+        <p>Regression and forecasting models that predict the tensile strength of welding plates from process data.</p>
+        <span class="res">Insights presented to supervisor</span><span class="org-y">RWTH Aachen · 2022–23</span>
+      </article>
+      <article class="card" data-t="res">
+        <span class="lbl">uncertainty · applicability_domain</span>
+        <h3>When can a prediction be trusted?</h3>
+        <p>My master's thesis: applicability domain and uncertainty quantification methods for molecular property prediction, flagging inputs a model was never really trained for.</p>
+        <span class="res">M.Sc. thesis</span><span class="org-y">RWTH Aachen · 2023</span>
+      </article>
+      <article class="card" data-t="cv">
+        <span class="lbl">explainable_ai · django</span>
+        <h3>Seeing what a CNN sees</h3>
+        <p>Image classifiers explained with class activation and saliency maps, and a Django web app that shows non-technical users how the network reaches its decision.</p>
+        <span class="res">Deployed to company servers</span><span class="org-y">Crowdception · 2019</span>
+      </article>
+      <article class="card" data-t="pred data">
+        <span class="lbl">marketing_ml · spark · flask</span>
+        <h3>Marketing models at scale</h3>
+        <p>Customer segmentation, lead scoring and campaign optimisation models on big-data pipelines with Apache Spark, served through Flask APIs. NLP solutions with Elasticsearch.</p>
+        <span class="res">Proof of concept to production</span><span class="org-y">Funnelbeam · 2018–19</span>
+      </article>
+      <article class="card" data-t="pred">
+        <span class="lbl">optimisation · automotive</span>
+        <h3>Targeted incentive distribution</h3>
+        <p>Models on automotive data that decide where incentives go to maximise revenue, with interactive visualisations for stakeholders.</p>
+        <span class="res">Revenue-focused incentives</span><span class="org-y">Fiverivers · 2019–20</span>
+      </article>
+      <article class="card" data-t="data">
+        <span class="lbl">supply_chain · automation</span>
+        <h3>Supply chain root causes</h3>
+        <p>Root-cause analysis on cost, production and supply chain data across planning and logistics, with automated recurring reports for inventory and demand.</p>
+        <span class="res">Recurring reporting automated</span><span class="org-y">Stremler AG · 2024</span>
+      </article>
+      <article class="card" data-t="nlp data">
+        <span class="lbl">side_project · llm · scraping</span>
+        <h3>AI job-matching board</h3>
+        <p>A personal pipeline, built with an AI coding agent, that collects open roles from 100+ company career sites, judges each against my profile and publishes a ranked weekly board.</p>
+        <span class="res">100+ sources, weekly</span><span class="org-y">Personal · 2026</span>
       </article>
     </div>
   </section>
@@ -375,6 +449,14 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
     btn.addEventListener("click", readColor);
     if ("IntersectionObserver" in window) new IntersectionObserver(function(e){ var was = visible; visible = e[0].isIntersecting; if (visible && !was) draw(); }).observe(cv);
   }
+
+  // project filters
+  var chips = document.querySelectorAll(".chip"), cards = document.querySelectorAll(".work .card");
+  chips.forEach(function(c){ c.addEventListener("click", function(){
+    var f = c.getAttribute("data-f");
+    chips.forEach(function(x){ x.setAttribute("aria-pressed", x === c ? "true" : "false"); });
+    cards.forEach(function(card){ card.hidden = !(f === "all" || (" " + card.getAttribute("data-t") + " ").indexOf(" " + f + " ") > -1); });
+  }); });
 
   var copy = document.getElementById("copy"), out = document.getElementById("copied");
   copy.addEventListener("click", function(){
