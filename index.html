@@ -116,6 +116,17 @@ h2::after{content:"";flex:1;height:1px;background:var(--rule)}
 .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
 .card .org-y{font:12px var(--f-mono);color:var(--muted)}
 .card .res{display:block}
+/* teaching note, testimonials */
+.review{margin:4px 0 0;color:var(--muted);font-size:15px;max-width:70ch}
+.review b{color:var(--ink);font-weight:600}
+.quotes{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:16px}
+.quote{margin:0;background:var(--surface);border:1px solid var(--rule);border-top:3px solid var(--box);padding:20px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.quote blockquote{margin:0;font-size:15.5px;line-height:1.55}
+.quote blockquote::before{content:"\201C";font:800 34px/0 var(--f-display);color:var(--box);vertical-align:-14px;margin-right:4px}
+.quote figcaption{margin-top:auto;display:flex;flex-direction:column;font-size:13.5px}
+.quote figcaption span{color:var(--muted);font:12px var(--f-mono)}
+.more{font:500 13.5px var(--f-mono);text-decoration:none}
+@media (max-width:760px){.quotes{grid-template-columns:minmax(0,1fr)}}
 /* experience timeline */
 .tl{display:flex;flex-direction:column}
 .job{display:grid;grid-template-columns:150px minmax(0,1fr);gap:4px 24px;padding:18px 0;border-top:1px solid var(--rule)}
@@ -126,7 +137,7 @@ h2::after{content:"";flex:1;height:1px;background:var(--rule)}
 .job ul{margin:6px 0 0;padding-left:18px;color:var(--muted);font-size:15px;display:flex;flex-direction:column;gap:3px}
 
 /* education */
-.edu{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:16px}
+.edu{display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:18px 24px}
 .edu div{border-top:2px solid var(--accent);padding-top:12px;display:flex;flex-direction:column;gap:4px;min-width:0}
 .edu b{font:700 17px/1.3 var(--f-display)}
 .edu span{color:var(--muted);font-size:14.5px}
@@ -211,6 +222,8 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
       <li><b>M.Sc.</b> Data Science, RWTH Aachen</li>
       <li><b>Kaggle</b> Competitions Expert</li>
       <li><b>4</b> published courses</li>
+      <li><b>9</b> books &amp; courses reviewed</li>
+      <li><b>16k</b> LinkedIn followers</li>
     </ul>
     <div class="links">
       <a class="btn primary" href="#contact">Get in touch</a>
@@ -223,7 +236,7 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
   </div>
 
   <section id="work" aria-labelledby="work-h">
-    <h2 id="work-h">Selected work · 14 projects</h2>
+    <h2 id="work-h">Selected work · 17 projects</h2>
     <div class="filters" role="toolbar" aria-label="Filter projects">
       <button type="button" class="chip" aria-pressed="true" data-f="all">All</button>
       <button type="button" class="chip" aria-pressed="false" data-f="cv">Computer vision</button>
@@ -236,13 +249,25 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
       <article class="card" data-t="cv">
         <span class="lbl">detection · tracking · re-id</span>
         <h3>Cashier-less store on one camera</h3>
-        <p>The vision models behind a fully working grab-and-go store: product detection, multi-object tracking and person re-identification, plus research into multi-camera setups.</p>
+        <p>Designed, built and tested a single-camera grab-and-go store from prototype to working product: product detection, multi-object tracking and person re-identification, plus research into multi-camera scaling.</p>
         <span class="res">Live store, single camera</span><span class="org-y">Livello · 2022–23</span>
+      </article>
+      <article class="card" data-t="cv">
+        <span class="lbl">pose · attributes · gdpr</span>
+        <h3>Privacy-aware shopper analytics</h3>
+        <p>Person recognition models for pose, movement, position, age and gender, built to comply with GDPR (DSGVO) for in-store tracking.</p>
+        <span class="res">Privacy built in</span><span class="org-y">Livello · 2022–23</span>
+      </article>
+      <article class="card" data-t="cv">
+        <span class="lbl">classification · smart_kiosk</span>
+        <h3>Food recognition for smart kiosks</h3>
+        <p>Deep learning models that recognise food products for automated checkout in smart kiosks, with testing and documentation of the vision pipeline.</p>
+        <span class="res">Automated checkout</span><span class="org-y">Livello · 2022</span>
       </article>
       <article class="card" data-t="cv">
         <span class="lbl">computer_vision · ocr</span>
         <h3>Automated meter reading</h3>
-        <p>Object detection and OCR that read electrical meters automatically, replacing manual reading.</p>
+        <p>Object detection and OCR that read electrical meters automatically for a utility client, replacing manual data collection.</p>
         <span class="res">−80% manual effort</span><span class="org-y">Systems Limited · 2020</span>
       </article>
       <article class="card" data-t="nlp">
@@ -254,7 +279,7 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
       <article class="card" data-t="nlp">
         <span class="lbl">nlp · biobert</span>
         <h3>Biomedical search engine</h3>
-        <p>A search system for biomedical data built on BioBERT models I trained and deployed, so users can search by meaning instead of exact keywords.</p>
+        <p>A biomedical search engine on BioBERT models I trained and deployed, so researchers can query large medical text collections by meaning instead of exact keywords.</p>
         <span class="res">Deployed on company servers</span><span class="org-y">Systems Limited · 2020</span>
       </article>
       <article class="card" data-t="pred">
@@ -266,14 +291,14 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
       <article class="card" data-t="pred data">
         <span class="lbl">forecasting · dashboards</span>
         <h3>Sales and demand forecasting</h3>
-        <p>Forecasting models for sales prediction and demand planning, delivered through interactive dashboards in Power BI and Plotly Dash.</p>
+        <p>Time-series models for sales forecasting and demand planning at a fashion company, delivered through interactive Power BI and Plotly Dash dashboards.</p>
         <span class="res">Dashboards for demand planning</span><span class="org-y">Systems Limited · 2020</span>
       </article>
       <article class="card" data-t="cv res">
         <span class="lbl">gans · synthetic_data</span>
         <h3>Synthetic data for scarce images</h3>
-        <p>Image classifiers for industrial welding data, with GANs generating extra training images where real samples were scarce.</p>
-        <span class="res">GAN-generated training data</span><span class="org-y">RWTH Aachen · 2022–23</span>
+        <p>Image classifiers for industrial welding research, where GAN-generated training images improved accuracy on a small real dataset.</p>
+        <span class="res">Higher accuracy from synthetic data</span><span class="org-y">RWTH Aachen · 2022–23</span>
       </article>
       <article class="card" data-t="pred res">
         <span class="lbl">regression · materials</span>
@@ -299,17 +324,23 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
         <p>Customer segmentation, lead scoring and campaign optimisation models on big-data pipelines with Apache Spark, served through Flask APIs. NLP solutions with Elasticsearch.</p>
         <span class="res">Proof of concept to production</span><span class="org-y">Funnelbeam · 2018–19</span>
       </article>
+      <article class="card" data-t="pred data">
+        <span class="lbl">recommender · spark · hybrid</span>
+        <h3>Hybrid job recommendation engine</h3>
+        <p>My Bachelor's final-year project: a job recommender on Apache Spark that combines content-based filtering (matching job and profile text) with collaborative filtering (learning from similar users), so each approach covers the other's blind spots.</p>
+        <span class="res">Hybrid recommender at big-data scale</span><span class="org-y">FAST-NU · 2018</span>
+      </article>
       <article class="card" data-t="pred">
         <span class="lbl">optimisation · automotive</span>
         <h3>Targeted incentive distribution</h3>
-        <p>Models on automotive data that decide where incentives go to maximise revenue, with interactive visualisations for stakeholders.</p>
-        <span class="res">Revenue-focused incentives</span><span class="org-y">Fiverivers · 2019–20</span>
+        <p>A yield optimisation engagement for an automotive client, with the SparkCognition team: models that target incentives to drive growth, presented to business executives.</p>
+        <span class="res">Recommendations adopted by the client</span><span class="org-y">Fiverivers · 2019–20</span>
       </article>
       <article class="card" data-t="data">
         <span class="lbl">supply_chain · automation</span>
         <h3>Supply chain root causes</h3>
-        <p>Root-cause analysis on cost, production and supply chain data across planning and logistics, with automated recurring reports for inventory and demand.</p>
-        <span class="res">Recurring reporting automated</span><span class="org-y">Stremler AG · 2024</span>
+        <p>ABC inventory, parts consistency and demand stability analyses for a motor manufacturer, and evaluation of plan optimisation for an animal feed producer.</p>
+        <span class="res">Procurement strategy insights</span><span class="org-y">Stremler AG · 2024</span>
       </article>
       <article class="card" data-t="nlp data">
         <span class="lbl">side_project · llm · scraping</span>
@@ -345,7 +376,8 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
     <div class="edu">
       <div><b>M.Sc. Computer Science</b><span>University of Bonn</span><small>2025 – present</small></div>
       <div><b>M.Sc. Data Science</b><span>RWTH Aachen University</span><small>2020 – 2023 · thesis on uncertainty quantification for molecular property prediction</small></div>
-      <div><b>B.Sc. Computer Science</b><span>FAST-NU, Islamabad</span><small>2014 – 2018 · job recommender on Apache Spark</small></div>
+      <div><b>B.Sc. Computer Science</b><span>FAST-NU, Islamabad</span><small>2014 – 2018 · final-year project: hybrid job recommender on Apache Spark</small></div>
+      <div><b>Summer course, Computer Vision</b><span>University of Cambridge, Sidney Sussex College</span><small>2017 · computer vision and image compression, Oxford Summer Courses</small></div>
     </div>
   </section>
 
@@ -359,13 +391,14 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
   </section>
 
   <section aria-labelledby="co-h">
-    <h2 id="co-h">Courses I've written</h2>
+    <h2 id="co-h">Teaching &amp; reviewing</h2>
     <ul class="courses">
       <li><a href="https://www.packtpub.com/en-de/product/data-wrangling-with-python-3x-9781789956597" target="_blank" rel="noopener">Data Wrangling with Python 3.x</a><span class="pub">Packt</span></li>
       <li><a href="https://www.educative.io/courses/intro-data-science-machine-learning" target="_blank" rel="noopener">An Introductory Guide to Data Science and Machine Learning</a><span class="pub">Educative</span></li>
       <li><a href="https://coderedpro.com/products/data-science-for-beginners" target="_blank" rel="noopener">Data Science for Beginners</a><span class="pub">CodeRed</span></li>
       <li><a href="https://www.scaler.com/topics/course/pytorch-for-deep-learning-free-course/" target="_blank" rel="noopener">PyTorch for Deep Learning</a><span class="pub">Scaler</span></li>
     </ul>
+    <p class="review">I was also a <b>technical reviewer for Packt</b> (2018–2020) on nine books and video courses, including <i>Modern Computer Vision with PyTorch</i>, <i>Automated Machine Learning</i>, <i>Distributed Machine Learning</i>, <i>Mastering Pandas</i> and <i>Hands-on Machine Learning with Scikit-Learn</i>.</p>
   </section>
 
   <section aria-labelledby="sk-h">
@@ -376,8 +409,19 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
       <dt>NLP &amp; LLMs</dt><dd>Large language models, RAG with Pinecone, BERT and BioBERT, spaCy, NLTK</dd>
       <dt>Data &amp; pipelines</dt><dd>Python, SQL, Apache Spark, PySpark, Elasticsearch, PostgreSQL, MongoDB</dd>
       <dt>MLOps &amp; deployment</dt><dd>Docker, Kubernetes, MLflow, Airflow, AWS, Flask and Django REST APIs, CI/CD, Git, Linux</dd>
+      <dt>Certifications</dt><dd>AI Agents Fundamentals (Hugging Face, 2025) · TensorFlow deployment, data pipelines, TensorFlow Lite and time series (DeepLearning.AI) · Kubernetes Mastery · Learn BERT · Big Data Capstone (Coursera)</dd>
       <dt>Languages</dt><dd>English (C2), German (A1, learning)</dd>
     </dl>
+  </section>
+
+  <section aria-labelledby="tm-h">
+    <h2 id="tm-h">What people say</h2>
+    <div class="quotes">
+      <figure class="quote"><blockquote>Jamshaid is one of the brightest young talents I've come across. He's very creative in his problem solving skills and a team player.</blockquote><figcaption><b>Max Rye</b><span>Co-founder and CEO, DeepCloud AI</span></figcaption></figure>
+      <figure class="quote"><blockquote>Give him the really challenging tasks, the ones that everyone else is struggling with, and he will get them done. No matter how complex the problem is, he will always come up with a brilliant, elegant, and cost-effective solution.</blockquote><figcaption><b>Rizwan Nawaz</b><span>Software Engineer II, RLDatix</span></figcaption></figure>
+      <figure class="quote"><blockquote>A brilliant team person. He feels great about helping others, especially with studies. Enthusiastic, determined and passionate about his field.</blockquote><figcaption><b>Uzair Hassan</b><span>Salesforce Solution Architect, studied with Jamshaid</span></figcaption></figure>
+    </div>
+    <a class="more" href="https://www.linkedin.com/in/jamshaid-sohail-1a3905115/" target="_blank" rel="noopener">Read all recommendations on LinkedIn →</a>
   </section>
 
   <section id="contact" aria-labelledby="ct-h">
