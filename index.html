@@ -119,6 +119,12 @@ h2::after{content:"";flex:1;height:1px;background:var(--rule)}
 /* teaching note, testimonials */
 .review{margin:4px 0 0;color:var(--muted);font-size:15px;max-width:70ch}
 .review b{color:var(--ink);font-weight:600}
+.certs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px 32px;margin-top:6px}
+.certs h3{font:600 12.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 8px;padding-top:10px;border-top:2px solid var(--accent)}
+.certs ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.certs li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:14.5px}
+.certs li a{color:var(--ink);text-decoration:none}.certs li a:hover{color:var(--accent);text-decoration:underline}
+.certs li small{font:12px var(--f-mono);color:var(--muted);white-space:nowrap}
 .quotes{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:16px}
 .quote{margin:0;background:var(--surface);border:1px solid var(--rule);border-top:3px solid var(--box);padding:20px;display:flex;flex-direction:column;gap:14px;min-width:0}
 .quote blockquote{margin:0;font-size:15.5px;line-height:1.55}
@@ -203,7 +209,7 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
 <div class="wrap">
   <header class="bar">
     <span>jamshaid.sohail / bonn, de</span>
-    <nav aria-label="Sections"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#kaggle">Kaggle</a><a href="#contact">Contact</a></nav>
+    <nav aria-label="Sections"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#kaggle">Kaggle</a><a href="#certificates">Certificates</a><a href="#contact">Contact</a></nav>
     <button id="theme" type="button">Night mode</button>
   </header>
 
@@ -401,6 +407,19 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
     <p class="review">I was also a <b>technical reviewer for Packt</b> (2018–2020) on nine books and video courses, including <i>Modern Computer Vision with PyTorch</i>, <i>Automated Machine Learning</i>, <i>Distributed Machine Learning</i>, <i>Mastering Pandas</i> and <i>Hands-on Machine Learning with Scikit-Learn</i>.</p>
   </section>
 
+  <section id="certificates" aria-labelledby="ce-h">
+    <h2 id="ce-h">Certificates · 31 Udemy courses</h2>
+    <p class="review">Courses I completed alongside my studies and work, 2017–2020. Each title opens its certificate on Udemy.</p>
+    <div class="certs">
+      <div><h3>AI, machine learning &amp; deep learning</h3><ul><li><a href="https://www.udemy.com/certificate/UC-E6NNJ1YU/" target="_blank" rel="noopener">Artificial Intelligence A-Z</a><small>2019</small></li><li><a href="https://www.udemy.com/certificate/UC-0O9RS4XU/" target="_blank" rel="noopener">Artificial Intelligence Masterclass</a><small>2019</small></li><li><a href="https://www.udemy.com/certificate/UC-YENK7VFX/" target="_blank" rel="noopener">Deep Learning A-Z</a><small>2018</small></li><li><a href="https://www.udemy.com/certificate/UC-MEZ43YX4/" target="_blank" rel="noopener">Deep Learning and Computer Vision A-Z</a><small>2018</small></li><li><a href="https://www.udemy.com/certificate/UC-TFWDQF5K/" target="_blank" rel="noopener">Machine Learning A-Z: ML, DL, AI with Python &amp; R</a><small>2017</small></li><li><a href="https://www.udemy.com/certificate/UC-JPOMH8WM/" target="_blank" rel="noopener">An Introduction to Deep Learning &amp; Computer Vision</a><small>2017</small></li><li><a href="https://www.udemy.com/certificate/UC-VL4OI2KH/" target="_blank" rel="noopener">Learn MATLAB with Image Processing</a><small>2018</small></li></ul></div>
+      <div><h3>NLP &amp; language models</h3><ul><li><a href="https://www.udemy.com/certificate/UC-0d794d04-5341-4034-bf74-c99efe9525d4/" target="_blank" rel="noopener">Learn BERT: essential NLP algorithm by Google</a><small>2020</small></li><li><a href="https://www.udemy.com/certificate/UC-X7SLWAT8/" target="_blank" rel="noopener">Deep Learning and NLP: Seq2Seq Model Theory</a><small>2019</small></li><li><a href="https://www.udemy.com/certificate/UC-TCIDFSQX/" target="_blank" rel="noopener">From 0 to 1: Machine Learning, NLP &amp; Python</a><small>2017</small></li></ul></div>
+      <div><h3>MLOps, deployment &amp; APIs</h3><ul><li><a href="https://www.udemy.com/certificate/UC-U0XWQR4H/" target="_blank" rel="noopener">Deployment of Machine Learning Models</a><small>2019</small></li><li><a href="https://www.udemy.com/certificate/UC-e35e354c-cc0b-4ad4-a743-d38496054d47/" target="_blank" rel="noopener">Kubernetes Mastery: Hands-On Lessons From a Docker Captain</a><small>2020</small></li><li><a href="https://www.udemy.com/certificate/UC-PL9E8S2Z/" target="_blank" rel="noopener">Hands on With Docker &amp; Docker Compose</a><small>2019</small></li><li><a href="https://www.udemy.com/certificate/UC-5T74UGO7/" target="_blank" rel="noopener">REST APIs with Flask and Python</a><small>2018</small></li><li><a href="https://www.udemy.com/certificate/UC-XQML418I/" target="_blank" rel="noopener">Python eCommerce: Build a Django Web Application</a><small>2019</small></li><li><a href="https://www.udemy.com/certificate/UC-TK8Y5NVW/" target="_blank" rel="noopener">Software Testing</a><small>2017</small></li></ul></div>
+      <div><h3>Big data &amp; Spark</h3><ul><li><a href="https://www.udemy.com/certificate/UC-1959BE0T/" target="_blank" rel="noopener">Taming Big Data with Apache Spark and Python</a><small>2018</small></li><li><a href="https://www.udemy.com/certificate/UC-QB0ZBWE6/" target="_blank" rel="noopener">From 0 to 1: Spark for Data Science with Python</a><small>2018</small></li><li><a href="https://www.udemy.com/certificate/UC-W4WZJW20/" target="_blank" rel="noopener">Taming Big Data with MapReduce and Hadoop</a><small>2017</small></li><li><a href="https://www.udemy.com/certificate/UC-H1V6O2KZ/" target="_blank" rel="noopener">Learn By Example: Hadoop, MapReduce for Big Data</a><small>2017</small></li><li><a href="https://www.udemy.com/certificate/UC-DDJM2W06/" target="_blank" rel="noopener">Learn By Example: Scala</a><small>2019</small></li></ul></div>
+      <div><h3>Cloud computing</h3><ul><li><a href="https://www.udemy.com/certificate/UC-633V051R/" target="_blank" rel="noopener">Introduction to Cloud Computing with Amazon Web Services</a><small>2018</small></li><li><a href="https://www.udemy.com/certificate/UC-P3N1CPSF/" target="_blank" rel="noopener">A Practical Introduction to Cloud Computing</a><small>2017</small></li><li><a href="https://www.udemy.com/certificate/UC-UHIQ9NC8/" target="_blank" rel="noopener">Introduction to Cloud Computing</a><small>2017</small></li></ul></div>
+      <div><h3>Software, networks &amp; more</h3><ul><li><a href="https://www.udemy.com/certificate/UC-LDSGDTWK/" target="_blank" rel="noopener">Angular: The Complete Guide</a><small>2017</small></li><li><a href="https://www.udemy.com/certificate/UC-ZX3XNKIA/" target="_blank" rel="noopener">UI/UX Design with Adobe XD</a><small>2017</small></li><li><a href="https://www.udemy.com/certificate/UC-PSV59H24/" target="_blank" rel="noopener">Blockchain A-Z: Build a Blockchain, Crypto &amp; Smart Contract</a><small>2018</small></li><li><a href="https://www.udemy.com/certificate/UC-R8D797DT/" target="_blank" rel="noopener">Introduction to Blockchain: Industry Applications</a><small>2019</small></li><li><a href="https://www.udemy.com/certificate/UC-YLJWFOGF/" target="_blank" rel="noopener">Learn Socket Programming in C</a><small>2017</small></li><li><a href="https://www.udemy.com/certificate/UC-R3NYTC9I/" target="_blank" rel="noopener">Computer Networks for Beginners</a><small>2017</small></li><li><a href="https://www.udemy.com/certificate/UC-S3WH9HOV/" target="_blank" rel="noopener">Computer Networks: Fundamentals + Wireshark</a><small>2017</small></li></ul></div>
+    </div>
+  </section>
+
   <section aria-labelledby="sk-h">
     <h2 id="sk-h">Toolkit</h2>
     <dl class="skills">
@@ -409,7 +428,7 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
       <dt>NLP &amp; LLMs</dt><dd>Large language models, RAG with Pinecone, BERT and BioBERT, spaCy, NLTK</dd>
       <dt>Data &amp; pipelines</dt><dd>Python, SQL, Apache Spark, PySpark, Elasticsearch, PostgreSQL, MongoDB</dd>
       <dt>MLOps &amp; deployment</dt><dd>Docker, Kubernetes, MLflow, Airflow, AWS, Flask and Django REST APIs, CI/CD, Git, Linux</dd>
-      <dt>Certifications</dt><dd>AI Agents Fundamentals (Hugging Face, 2025) · TensorFlow deployment, data pipelines, TensorFlow Lite and time series (DeepLearning.AI) · Kubernetes Mastery · Learn BERT · Big Data Capstone (Coursera)</dd>
+      <dt>Certifications</dt><dd>AI Agents Fundamentals (Hugging Face, 2025) · TensorFlow deployment, data pipelines, TensorFlow Lite and time series (DeepLearning.AI) · Big Data Capstone (Coursera) · <a href="#certificates">31 Udemy certificates</a></dd>
       <dt>Languages</dt><dd>English (C2), German (A1, learning)</dd>
     </dl>
   </section>
