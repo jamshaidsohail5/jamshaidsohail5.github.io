@@ -203,7 +203,7 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
 }
 @media (prefers-reduced-motion:no-preference){
   .det{animation:lock .9s cubic-bezier(.2,.8,.2,1) both}
-  @keyframes lock{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+  @keyframes lock{from{clip-path:inset(-40px 100% -14px -14px)}to{clip-path:inset(-40px -14px -14px -14px)}}
   /* photo: scan line sweeps down, then the box converges onto the face */
   .photo .scan{animation:scan 1.4s ease-in-out .35s 1 both}
   @keyframes scan{0%{top:-24%;opacity:0}12%{opacity:1}88%{opacity:1}100%{top:100%;opacity:0}}
@@ -211,6 +211,38 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
   @keyframes converge{0%{left:3%;top:3%;width:94%;height:94%;opacity:0}25%{opacity:1}100%{left:36%;top:6%;width:29%;height:40%;opacity:1}}
   .photo .face::after{content:"";position:absolute;inset:-2px;border:2px solid var(--box);animation:ping 1s ease-out 2.6s 2}
   @keyframes ping{from{opacity:.8;transform:scale(1)}to{opacity:0;transform:scale(1.25)}}
+}
+/* ---- motion layer 2: detection-themed effects (all off under reduced motion) ---- */
+#progress{position:fixed;left:0;top:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),var(--box));z-index:50;pointer-events:none}
+.bar nav a{position:relative}
+.bar nav a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--box);transform:scaleX(0);transform-origin:0 50%;transition:transform .3s ease}
+.bar nav a.on{color:var(--ink)}
+.bar nav a.on::after,.bar nav a:hover::after{transform:scaleX(1)}
+.card{overflow:hidden}
+.card > *{position:relative;z-index:1}
+.card::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .35s ease;
+  background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%), color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%)}
+.card::after{content:"";position:absolute;inset:7px;z-index:2;pointer-events:none;opacity:0;transform:scale(1.06);
+  transition:opacity .2s ease, transform .4s cubic-bezier(.2,.8,.2,1);
+  background:
+    linear-gradient(var(--box),var(--box)) left top/16px 2px no-repeat, linear-gradient(var(--box),var(--box)) left top/2px 16px no-repeat,
+    linear-gradient(var(--box),var(--box)) right top/16px 2px no-repeat, linear-gradient(var(--box),var(--box)) right top/2px 16px no-repeat,
+    linear-gradient(var(--box),var(--box)) left bottom/16px 2px no-repeat, linear-gradient(var(--box),var(--box)) left bottom/2px 16px no-repeat,
+    linear-gradient(var(--box),var(--box)) right bottom/16px 2px no-repeat, linear-gradient(var(--box),var(--box)) right bottom/2px 16px no-repeat}
+.card:hover::before,.card:hover::after,.card:focus-within::after{opacity:1;transform:none}
+.medal{position:relative;overflow:hidden}
+.medal::after{content:"";position:absolute;inset:0;pointer-events:none;transform:translateX(-110%);
+  background:linear-gradient(105deg, transparent 35%, color-mix(in srgb, var(--box) 22%, transparent) 50%, transparent 65%)}
+@media (prefers-reduced-motion:no-preference){
+  .js-motion .rv{opacity:0;transform:translateY(18px)}
+  .js-motion .rv.in{opacity:1;transform:none;transition:opacity .7s ease var(--d,0ms), transform .7s cubic-bezier(.2,.8,.2,1) var(--d,0ms)}
+  .medal.in::after,.medal:hover::after{animation:shine 1.3s ease .25s}
+  @keyframes shine{to{transform:translateX(110%)}}
+  .avail::before{animation:pulse 2.2s ease-out infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent)}70%,100%{box-shadow:0 0 0 9px transparent}}
+  .js-motion .contact.rv.in{animation:acquire 1.4s ease-out .35s 2}
+  @keyframes acquire{0%{box-shadow:0 0 0 0 color-mix(in srgb, var(--box) 60%, transparent)}100%{box-shadow:0 0 0 14px transparent}}
+  h2.decoding{color:var(--accent)}
 }
 </style>
 </head>
@@ -542,6 +574,68 @@ footer{font:12.5px var(--f-mono);color:var(--muted);display:flex;justify-content
     chips.forEach(function(x){ x.setAttribute("aria-pressed", x === c ? "true" : "false"); });
     cards.forEach(function(card){ card.hidden = !(f === "all" || (" " + card.getAttribute("data-t") + " ").indexOf(" " + f + " ") > -1); });
   }); });
+
+  // ---- motion layer 2 ----
+  var io = "IntersectionObserver" in window;
+  // scroll progress bar + current section in the menu
+  var bar = document.createElement("div"); bar.id = "progress"; bar.setAttribute("aria-hidden", "true"); document.body.appendChild(bar);
+  var navLinks = [].slice.call(document.querySelectorAll(".bar nav a"));
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = "scaleX(" + (h > 0 ? Math.min(1, scrollY / h) : 0) + ")";
+    var cur = null;
+    navLinks.forEach(function(a){ var s = document.querySelector(a.getAttribute("href")); if (s && s.getBoundingClientRect().top < innerHeight * .35) cur = a; });
+    navLinks.forEach(function(a){ a.classList.toggle("on", a === cur); });
+  }
+  addEventListener("scroll", onScroll, {passive: true}); onScroll();
+
+  // soft light that follows the pointer on project cards
+  document.querySelectorAll(".card").forEach(function(c){
+    c.addEventListener("pointermove", function(e){ var r = c.getBoundingClientRect(); c.style.setProperty("--mx", (e.clientX - r.left) + "px"); c.style.setProperty("--my", (e.clientY - r.top) + "px"); });
+  });
+
+  if (!calm && io) {
+    root.classList.add("js-motion");
+    // reveal blocks as they scroll in, staggered within each group
+    var groups = [".work .card", ".job", ".edu > div", ".medal", ".courses li", ".award", ".certs > div", ".quote", ".contact"];
+    var rv = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add("in"); rv.unobserve(e.target); } }); }, {rootMargin: "0px 0px -8% 0px"});
+    groups.forEach(function(sel){ [].slice.call(document.querySelectorAll(sel)).forEach(function(el, i){ el.classList.add("rv"); el.style.setProperty("--d", (i % 6) * 70 + "ms"); rv.observe(el); }); });
+
+    // section titles decode from random characters
+    var glyphs = "01<>/#*+=_ABCDEFXYZ";
+    var hx = new IntersectionObserver(function(es){ es.forEach(function(e){
+      if (!e.isIntersecting) return; hx.unobserve(e.target);
+      var h = e.target, txt = h.textContent, t0 = performance.now(), dur = 700;
+      h.setAttribute("aria-label", txt); h.classList.add("decoding");
+      (function step(t){
+        var p = Math.min(1, (t - t0) / dur), n = Math.floor(p * txt.length), out = txt.slice(0, n);
+        for (var i = n; i < txt.length; i++) out += txt[i] === " " ? " " : glyphs[(Math.random() * glyphs.length) | 0];
+        h.textContent = out;
+        if (p < 1) requestAnimationFrame(step); else { h.textContent = txt; h.classList.remove("decoding"); }
+      })(t0);
+    }); }, {threshold: .6});
+    document.querySelectorAll("section h2").forEach(function(h){ hx.observe(h); });
+
+    // numbers: hero facts count up; Kaggle ranks climb down the leaderboard
+    function tween(el, from, to, fmt, dur){
+      var t0 = performance.now();
+      (function step(t){ var p = Math.min(1, (t - t0) / dur), v = from + (to - from) * (1 - Math.pow(1 - p, 3)); el.textContent = fmt(v, p); if (p < 1) requestAnimationFrame(step); })(t0);
+    }
+    var nx = new IntersectionObserver(function(es){ es.forEach(function(e){ if (!e.isIntersecting) return; nx.unobserve(e.target); e.target._go(); }); }, {threshold: .5});
+    document.querySelectorAll(".facts b").forEach(function(b){
+      var m = b.textContent.match(/^(\d+)(.*)$/); if (!m) return;
+      var n = +m[1], rest = m[2];
+      b._go = function(){ tween(b, 0, n, function(v, p){ return (p < 1 ? Math.round(v) : n) + rest; }, 1200); };
+      b.textContent = "0" + rest; nx.observe(b);
+    });
+    document.querySelectorAll(".rank").forEach(function(r){
+      var node = r.firstChild, small = r.querySelector("small"); if (!node || node.nodeType !== 3 || !small) return;
+      var rank = parseInt(node.textContent.replace(/\D/g, ""), 10), total = parseInt(small.textContent.replace(/\D/g, ""), 10);
+      if (!rank || !total) return;
+      r._go = function(){ tween(node, total, rank, function(v, p){ return "#" + (p < 1 ? Math.round(v).toLocaleString("en") : rank); }, 1600); };
+      node.textContent = "#" + total.toLocaleString("en"); nx.observe(r);
+    });
+  }
 
   var copy = document.getElementById("copy"), out = document.getElementById("copied");
   copy.addEventListener("click", function(){
